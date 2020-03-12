@@ -1,6 +1,9 @@
 package model.logic;
 
-public class Multa {
+import java.lang.Comparable;
+
+public class Multa implements Comparable<Multa>
+{
 
 	private Caracteristica properties;
 	private Ubicacion geometry;
@@ -28,5 +31,13 @@ public class Multa {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	@Override
+	public int compareTo(Multa o) 
+	{
+
+			return o.getGeometry().getCoord()[0].compareTo(geometry.getCoord()[0]);
+		
 	}
 }

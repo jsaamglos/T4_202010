@@ -1,6 +1,6 @@
 package model.data_structures;
 
-public class ListaEncadenada<T extends Comparable<T>> implements IListaEncadenada<T> {
+public class ListaEncadenada<K, T extends Comparable<T>> implements IListaEncadenada<K, T> {
 	// apuntador a primer elemento
 	private Node<K,T> primerElemento;
 
@@ -16,16 +16,16 @@ public class ListaEncadenada<T extends Comparable<T>> implements IListaEncadenad
 	}
 
 	// agrega un elemento
-	public void agregarElemento(T dato) {
+	public void agregarElemento(K llave, T dato) {
 
 		if (primerElemento == null) {
-			Node<T> nodo = new Node<T>(dato, null);
+			Node<K, T> nodo = new Node<K, T>(llave, dato, null);
 			// agrega el nodo como ultimo y primer elemento
 			primerElemento = nodo;
 			ultimoElemento = nodo;
 		} else {
 			// pone el elemento al final de la fila
-			ultimoElemento = new Node<T>(dato, ultimoElemento);
+			ultimoElemento = new Node<K, T>(llave, dato, ultimoElemento);
 		}
 
 		// incrementa el tamano
@@ -40,7 +40,7 @@ public class ListaEncadenada<T extends Comparable<T>> implements IListaEncadenad
 	// retorna el elemento dado por parametro
 	public boolean existeElemento(T dato) {
 		// crea nodo igual al primer elemento
-		Node<T> nodo = primerElemento;
+		Node<K, T> nodo = primerElemento;
 
 		// itera los elementos hasta que se acaben o encuentre el elemento
 		while (nodo != null && !nodo.getElemento().equals(dato)) {
@@ -53,7 +53,7 @@ public class ListaEncadenada<T extends Comparable<T>> implements IListaEncadenad
 
 	public void eliminarElemento(T dato) {
 		// crea nodo igual al primer elemento
-		Node<T> nodo = primerElemento;
+		Node<K, T> nodo = primerElemento;
 
 		// itera los elementos hasta que se acaben o encuentre el elemento
 		while (nodo != null && !nodo.getElemento().equals(dato)) {
@@ -79,7 +79,7 @@ public class ListaEncadenada<T extends Comparable<T>> implements IListaEncadenad
 	public T darElemento(int index) {
 		T elemento = null;
 		if (index < tamano) {
-			Node<T> n = primerElemento;
+			Node<K, T> n = primerElemento;
 			for (int i = 0; i < index + 1;) {
 				n = n.getSiguiente();
 			}
@@ -93,11 +93,11 @@ public class ListaEncadenada<T extends Comparable<T>> implements IListaEncadenad
 		return tamano == 0;
 	}
 
-	public Node<T> darPrimeraPosicion()
+	public Node<K, T> darPrimeraPosicion()
 	{
 		return primerElemento;
 	}
-	public Node<T> darUltimaPosicion()
+	public Node<K, T> darUltimaPosicion()
 	{
 		return ultimoElemento;
 	}
