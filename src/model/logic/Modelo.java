@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
+import java.util.Iterator;
 
 import com.google.gson.Gson;
 
@@ -32,6 +33,7 @@ public class Modelo {
 	 * Constructor del modelo del mundo con capacidad predefinida
 	 */
 	public Modelo() {
+		heap = new MaxPQ<>();
 		Gson gson = new Gson();
 		lista = new ListaEncadenada<Double, Multa>();
 		try {
@@ -91,10 +93,29 @@ public class Modelo {
 		lista.eliminarElemento(dato);
 	}
 
-	public void crearPrioridad()
+	public void agregarHeap(Multa m)
 	{
-		heap = new MaxPQ<>();
+		heap.insert(m);
+	}
+
+	public String masAlNortePorVehiculos(String tipoVehiculo, int n)
+	{
+		for(Node<Double, Multa> actual = lista.darPrimeraPosicion(); actual!= null; actual = actual.getSiguiente())
+		{
+			if(actual.getElemento().getProperties().getClaseVehiculo().equals(tipoVehiculo))
+			{
+				heap.insert(actual.getElemento());
+			}
+		}
+
+		String respuesta = "";
+		Iterator<Multa> iter = heap.iterator();
+		for(int i = 0; i < n && iter.hasNext(); i++)
+		{
+			respuesta += iter.next() + "\n";
+		}
 		
+		return respuesta;
 	}
 	
 }
