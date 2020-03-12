@@ -34,7 +34,7 @@ public class TestMaxColaCP {
 	}
 
 	@Test
-	public void testTamaño() {
+	public void testTamaï¿½o() {
 		setUp2();
 		assertTrue(colaPriority.size() == 4);
 		setUp1();
